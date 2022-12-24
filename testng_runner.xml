@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite Tests">
+
+	<test name="Automated tests">
+		<classes>
+			<class name ="com.TestngDemo"></class>
+			<class name ="com.TestngDemo2"></class>
+		</classes>
+	</test>
+
+</suite>
