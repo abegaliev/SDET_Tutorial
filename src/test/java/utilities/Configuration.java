@@ -14,34 +14,34 @@ import java.util.Properties;
  */
 public final class Configuration {
 
-	private static Properties configFile;
-	private final static String fileName = "./src/test/resources/testData/configuration.properties"; // file
-																										// path
-	static {
+    private static Properties configFile;
+    private final static String fileName = "./src/test/resources/testData/configuration.properties"; // file
+												     // path
+    static {
 
-		try {
-			FileInputStream input = new FileInputStream(fileName);
-			configFile = new Properties();
-			configFile.load(input);
+	try {
+	    FileInputStream input = new FileInputStream(fileName);
+	    configFile = new Properties();
+	    configFile.load(input);
 
-			input.close();
-		} catch (FileNotFoundException e) {
-			System.err.println("Could't find properties file: " + fileName + ":\n" + e);
+	    input.close();
+	} catch (FileNotFoundException e) {
+	    System.err.println("Could't find properties file: " + fileName + ":\n" + e);
 
-		} catch (IOException e) {
-			System.out.println("Exception while reading the file: " + fileName);
-		}
+	} catch (IOException e) {
+	    System.out.println("Exception while reading the file: " + fileName);
 	}
+    }
 
-	/**
-	 * Method returns a value of the given key from properties file.
-	 * 
-	 * @param String key
-	 * @return String value of the key
-	 */
-	public static String getProperty(String key) {
-		String value = configFile.getProperty(key);
-		return value;
-	}
+    /**
+     * Method returns a value of the given key from properties file.
+     * 
+     * @param String key
+     * @return String value of the key
+     */
+    public static String getProperty(String key) {
+	String value = configFile.getProperty(key);
+	return value;
+    }
 
 }

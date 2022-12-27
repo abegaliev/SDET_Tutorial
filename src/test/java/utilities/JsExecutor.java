@@ -20,7 +20,7 @@ import org.openqa.selenium.WebElement;
  */
 public class JsExecutor {
 
-	private static final JavascriptExecutor js = (JavascriptExecutor) Browser.getDriver();
+	private static final JavascriptExecutor js = (JavascriptExecutor) BrowserUtil.getDriver();
 
 	/**
 	 * Finds and returns WebElement using JavascriptExecutor
@@ -169,7 +169,7 @@ public class JsExecutor {
 	 * @return title
 	 */
 	public static String getTitle() {
-		JavascriptExecutor js = (JavascriptExecutor) Browser.getDriver();
+		JavascriptExecutor js = (JavascriptExecutor) BrowserUtil.getDriver();
 		String title = js.executeScript("return document.title;").toString().trim();
 		return title;
 	}
