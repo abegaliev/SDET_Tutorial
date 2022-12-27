@@ -17,94 +17,95 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import utilities.BrowserUtil;
+
 public class JavaScriptDemo {
 
-	private static WebDriver driver;
-	private static WebDriverWait wait;
-	private static JavascriptExecutor js;
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private JavascriptExecutor js;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		driver = WebDriverUtil.getDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    @BeforeClass
+    public void setUpBeforeClass() throws Exception {
+	driver = BrowserUtil.getDriver();
+	wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().maximize();
-		js = (JavascriptExecutor) driver;
+	js = (JavascriptExecutor) driver;
 
+    }
+
+    @AfterClass
+    public void tearDownAfterClass() throws Exception {
+	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.quit();
+
+    }
+
+    @Test
+    public void test() throws InterruptedException {
+	js.executeScript("window.location= 'https://courses.letskodeit.com/practice';");
+
+	//		WebElement signInBtn = getElement(By.xpath("//input[@id='bmwradio']"));
+	WebElement signInBtn = getElement(By.id("bmwradio"));
+
+	System.out.println("Element " + signInBtn.getText());
+	signInBtn.click();
+	Thread.sleep(Duration.ofSeconds(2));
+	scrollToButtom();
+    }
+
+    public void scrollToButtom() {
+	js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    public void refreshWindow() {
+	js.executeScript("location.reload()");
+    }
+
+    /**
+     * Finds and returns WebElement using JavascriptExecutor
+     * 
+     * @param By locator
+     * @return WebElement
+     */
+    public WebElement getElement(By locator) {
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	WebElement element = null;
+
+	String locText = locator.toString();
+	System.out.println(locText);
+	int index = locText.indexOf(" ") + 1;
+	locText = locText.substring(index);
+	locText = "'" + locText + "'";
+
+	if (locator instanceof ById) {
+	    element = (WebElement) js.executeScript("return document.getElementById(" + locText + ");");
+
+	} else if (locator instanceof ByClassName) {
+	    List<WebElement> list = (List<WebElement>) js
+		    .executeScript("return document.getElementsByClassName(" + locText + ");");
+	    if (list.size() > 0)
+		element = list.get(0);
+
+	} else if (locator instanceof ByName) {
+	    List<WebElement> list = (List<WebElement>) js
+		    .executeScript("return document.getElementsByName(" + locText + ");");
+	    if (list.size() > 0)
+		element = list.get(0);
+
+	} else if (locator instanceof ByCssSelector) {
+	    element = (WebElement) js.executeScript("return document.querySelector(" + locText + ");");
+
+	    //		} else if (locator instanceof ByXPath) {
+	    //
+	    //			String script = "return document.evaluate(" + locText + ", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+	    //			element = (WebElement) js.executeScript(script);
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		Thread.sleep(Duration.ofSeconds(2));
-		driver.quit();
+	if (element == null)
+	    throw new NoSuchElementException(locator.toString());
 
-	}
-
-	@Test
-	public void test() throws InterruptedException {
-		js.executeScript("window.location= 'https://courses.letskodeit.com/practice';");
-
-//		WebElement signInBtn = getElement(By.xpath("//input[@id='bmwradio']"));
-		WebElement signInBtn = getElement(By.id("bmwradio"));
-
-		System.out.println("Element " + signInBtn.getText());
-		signInBtn.click();
-		Thread.sleep(Duration.ofSeconds(2));
-		scrollToButtom();
-	}
-
-	public static void scrollToButtom() {
-		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-	}
-
-	public static void refreshWindow() {
-		js.executeScript("location.reload()");
-	}
-
-	/**
-	 * Finds and returns WebElement using JavascriptExecutor
-	 * 
-	 * @param By locator
-	 * @return WebElement
-	 */
-	public static WebElement getElement(By locator) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement element = null;
-
-		String locText = locator.toString();
-		System.out.println(locText);
-		int index = locText.indexOf(" ") + 1;
-		locText = locText.substring(index);
-		locText = "'" + locText + "'";
-
-
-		if (locator instanceof ById) {
-			element = (WebElement) js.executeScript("return document.getElementById(" + locText + ");");
-
-		} else if (locator instanceof ByClassName) {
-			List<WebElement> list = (List<WebElement>) js.executeScript("return document.getElementsByClassName(" + locText + ");");
-			if (list.size() > 0)
-				element = list.get(0);
-
-		} else if (locator instanceof ByName) {
-			List<WebElement> list = (List<WebElement>) js.executeScript("return document.getElementsByName(" + locText + ");");
-			if (list.size() > 0)
-				element = list.get(0);
-
-		} else if (locator instanceof ByCssSelector) {
-			element = (WebElement) js.executeScript("return document.querySelector(" + locText + ");");
-
-//		} else if (locator instanceof ByXPath) {
-//
-//			String script = "return document.evaluate(" + locText + ", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-//			element = (WebElement) js.executeScript(script);
-		}
-
-		if (element == null)
-			throw new NoSuchElementException(locator.toString());
-
-		return element;
-	}
+	return element;
+    }
 
 }

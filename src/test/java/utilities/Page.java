@@ -23,7 +23,7 @@ public class Page {
 	 * @param element
 	 */
 	public static void moveToElement(WebElement element) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		Actions action = new Actions(driver);
 		action.moveToElement(element).build().perform();
 	}
@@ -51,7 +51,7 @@ public class Page {
 	 * @param timeOutInSeconds
 	 */
 	public static void waitForPageLoad(int timeOutInSeconds) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
@@ -73,7 +73,7 @@ public class Page {
 	 * @param timeInSec
 	 */
 	public void waitToDismissAlert(int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		try {
 			// Waits till alert is present
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSec));
@@ -92,9 +92,9 @@ public class Page {
 	 * @param currentHandle;
 	 */
 	public static void switchToSecondWindow() {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		String currentHandle = driver.getWindowHandle();
-		List<String> handles = Browser.getListOfHandles();
+		List<String> handles = BrowserUtil.getListOfHandles();
 		for (String handle : handles) {
 			if (!handle.equals(currentHandle)) {
 				driver.switchTo().window(handle);
@@ -105,8 +105,8 @@ public class Page {
 	}
 
 	public static void switchToWindow(int index) {
-		WebDriver driver = Browser.getDriver();
-		List<String> handles = Browser.getListOfHandles();
+		WebDriver driver = BrowserUtil.getDriver();
+		List<String> handles = BrowserUtil.getListOfHandles();
 		if (handles.size() > index)
 			driver.switchTo().window(handles.get(index));
 		else {
@@ -120,7 +120,7 @@ public class Page {
 	 * @param targetTitle
 	 */
 	public static void switchToWindowByTitle(String targetTitle) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		String origin = driver.getWindowHandle();
 		for (String handle : driver.getWindowHandles()) {
 			driver.switchTo().window(handle);
@@ -139,7 +139,7 @@ public class Page {
 	 * @param targetUrl
 	 */
 	public static void switchToWindow(String targetUrl) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		String origin = driver.getWindowHandle();
 		for (String handle : driver.getWindowHandles()) {
 			driver.switchTo().window(handle);
@@ -158,7 +158,7 @@ public class Page {
 	 * @param expectedTitle
 	 */
 	public static void verifyTitle(String expectedTitle) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		String actualTitle = driver.getTitle();
 		Assert.assertEquals(expectedTitle, actualTitle, "Title verification failed: ");
 	}
@@ -169,7 +169,7 @@ public class Page {
 	 * @param expectedUrl
 	 */
 	public static void verifyUrl(String expectedUrl) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		String actualUrl = driver.getCurrentUrl();
 		Assert.assertEquals(expectedUrl, actualUrl, "URl verification failed: ");
 	}

@@ -10,44 +10,40 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utilities.BrowserUtil;
+
 public class MyDriver {
 
-	static WebDriver driver = WebDriverUtil.getDriver();
+    static WebDriver driver = BrowserUtil.getDriver();
 
+    public static boolean isPresent(By by) {
+	List<WebElement> elements = driver.findElements(by);
+	return (elements.size() > 0);
+    }
 
+    public static WebElement waitForElementVisibility(By locator, int seconds) {
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 
-	public static boolean isPresent(By by) {
-		List<WebElement> elements = driver.findElements(by);
-		return (elements.size() > 0);
-	}
+	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	return element;
+    }
 
-	public static WebElement waitForElementVisibility(By locator, int seconds) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+    public static List<WebElement> waitForElementsVisibility(By locator, int seconds) {
+	List<WebElement> listElement = new ArrayList<>();
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
 
-		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-		return element;
-	}
+	listElement = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 
-	public static List<WebElement> waitForElementsVisibility(By locator, int seconds) {
-		List<WebElement> listElement = new ArrayList<>();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+	if (listElement.isEmpty())
+	    System.out.println("Unable to locate elements by locator: " + locator.toString());
 
-		listElement = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-
-		if (listElement.isEmpty())
-			System.out.println("Unable to locate elements by locator: " + locator.toString());
-
-		return listElement;
-	}
+	return listElement;
+    }
 
 }
 
 enum Locator {
-	
-	ID,
-	NAME,
-	ClassNAME,
-	XPATH,
-	CssSELECTOR;
-	
+
+    ID, NAME, ClassNAME, XPATH, CssSELECTOR;
+
 }

@@ -35,7 +35,7 @@ public class Extent {
 
 	
 	public static void failTest(Scenario scenario) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 			// Adding screenshot to the extent report
 		logger.log(LogStatus.FAIL, "Failed scenario: "+ scenario.getName()+": ", logger.addScreenCapture(Screenshot.takeScreenshot()));
 		

@@ -17,7 +17,7 @@ import io.cucumber.java.Scenario;
 
 public final class Screenshot {
 
-	private static WebDriver driver = Browser.getDriver();
+	private static WebDriver driver = BrowserUtil.getDriver();
 
 	/**
 	 * Takes a screenshot using FilesUtil(custom class). File sourceFile =

@@ -10,43 +10,40 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import utilities.BrowserUtil;
+
 public class FindElementTricks {
 
-	static WebDriver driver;
-	static WebDriverWait wait;
+    WebDriver driver;
+    WebDriverWait wait;
 
+    @BeforeClass
+    public void setUpBeforeClass() throws Exception {
+	driver = BrowserUtil.getDriver();
+	wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		driver = WebDriverUtil.getDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    @Test
+    public void test() throws InterruptedException {
+	driver.get("http://learn.letskodeit.com");
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().maximize();
-	}
+	WebElement practiceBtn = driver.findElement(By.xpath("//a[contains(text(), 'Practice')]"));
+	System.out.println(practiceBtn.getText());
 
+	practiceBtn.click();
 
-	@Test
-	public void test() throws InterruptedException {
-		driver.get("http://learn.letskodeit.com");
+	WebElement linkBtn = driver.findElement(By.xpath("//a[@href= 'https://courses.letskodeit.com/practice']"));
+	//		WebElement linkBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href= 'https://courses.letskodeit.com/practice']")));
 
-		WebElement practiceBtn = driver.findElement(By.xpath("//a[contains(text(), 'Practice')]"));
-		System.out.println(practiceBtn.getText());
-		
-		practiceBtn.click();
+	System.out.println(linkBtn.getText());
+	linkBtn.click();
+	Thread.sleep(3000);
 
-		WebElement linkBtn = driver.findElement(By.xpath("//a[@href= 'https://courses.letskodeit.com/practice']"));
-//		WebElement linkBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href= 'https://courses.letskodeit.com/practice']")));
+    }
 
-		System.out.println(linkBtn.getText());
-		linkBtn.click();
-		Thread.sleep(3000);
-
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		driver.quit();
-	}
+    @AfterClass
+    public void tearDownAfterClass() throws Exception {
+	BrowserUtil.quit();
+    }
 
 }

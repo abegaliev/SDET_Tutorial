@@ -38,7 +38,7 @@ public class Element {
 	 * @return A list of texts of WebElements
 	 */
 	public static List<String> getTextOfElements(By by) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		List<WebElement> elements = driver.findElements(by);
 		List<String> list = new ArrayList<>();
 		for (WebElement element : elements) {
@@ -70,7 +70,7 @@ public class Element {
 	 * @return true of false
 	 */
 	public static boolean isPresented(By locator) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		List<WebElement> elementList = driver.findElements(locator);
 		int size = elementList.size();
 		return (size > 0);
@@ -87,7 +87,7 @@ public class Element {
 	 * @return element
 	 */
 	public static WebElement waitToBeVisible(By locator, int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		System.out.println("Explicitly waiting: " + timeInSec + " seconds for element to be available");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSec));
 		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -104,7 +104,7 @@ public class Element {
 	 * @return element
 	 */
 	public static WebElement waitToBeVisible(WebElement element, int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		System.out.println("Explicitly waiting: " + timeInSec + " seconds for element to be available");
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSec));
@@ -123,7 +123,7 @@ public class Element {
 	 * @return element
 	 */
 	public static WebElement waitToBeClickable(By locator, int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		System.out.println("Explicitly waiting: " + timeInSec + " seconds for element to be clickable");
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSec));
@@ -141,7 +141,7 @@ public class Element {
 	 * @return element
 	 */
 	public static WebElement waitToBeClickable(WebElement element, int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		System.out.println("Explicitly waiting: " + timeInSec + " seconds for element to be clickable");
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSec));
@@ -158,7 +158,7 @@ public class Element {
 	 * @return WebElement
 	 */
 	public static WebElement fluentWait(final By locator, int timeInSec) {
-		WebDriver driver = Browser.getDriver();
+		WebDriver driver = BrowserUtil.getDriver();
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeInSec))
 				.ignoring(NoSuchElementException.class);
 
