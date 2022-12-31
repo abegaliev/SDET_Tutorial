@@ -55,33 +55,33 @@ public class NavigateBetweenPages {
 	infor.click();
 
 	driver.navigate().back();
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	driver.navigate().forward();
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	WebElement openTabBtn = driver.findElement(By.id("opentab"));
 	wait.until(ExpectedConditions.elementToBeClickable(openTabBtn)).click();
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	List<String> windowHandles = new ArrayList<>(driver.getWindowHandles());
 	System.out.println("Window handles: " + windowHandles.toString());
 	driver.switchTo().window(windowHandles.get(1));
 	System.out.println(driver.getTitle());
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	assertEquals("All Courses", driver.getTitle());
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	driver.switchTo().window(windowHandles.get(0));
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	Select select = new Select(driver.findElement(By.id("carselect")));
 	System.out.println(select.getAllSelectedOptions().size());
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	select.selectByValue("benz");
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	select.selectByVisibleText("Honda");
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	System.out.println("Selected options: " + select.getAllSelectedOptions().get(0).getText());
 
 	MyDriver.waitForElementVisibility(By.id("carselect"), 5);

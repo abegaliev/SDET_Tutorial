@@ -42,11 +42,7 @@ public class WebDriverUtil {
 
 	radioOptn.forEach(s -> {
 	    s.click();
-	    try {
-		Thread.sleep(Duration.ofSeconds(1));
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    }
+	    BrowserUtil.sleep(2);
 	});
 
 	wait.until(ExpectedConditions.elementToBeClickable(loginBox));
