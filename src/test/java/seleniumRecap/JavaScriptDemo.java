@@ -36,7 +36,7 @@ public class JavaScriptDemo {
 
     @AfterClass
     public void tearDownAfterClass() throws Exception {
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	BrowserUtil.quit();
 
     }
@@ -50,7 +50,7 @@ public class JavaScriptDemo {
 
 	System.out.println("Element " + signInBtn.getText());
 	signInBtn.click();
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	scrollToButtom();
     }
 

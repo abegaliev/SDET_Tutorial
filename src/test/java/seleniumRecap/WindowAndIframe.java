@@ -42,39 +42,38 @@ public class WindowAndIframe {
 	}
 	driver.findElement(By.cssSelector("input#search")).sendKeys("Hello a new Window");
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 	driver.close();
 	driver.switchTo().window(parentHandle);
 	System.out.println(driver.getCurrentUrl());
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 
 	WebElement iframe = driver.findElement(By.cssSelector("iframe#courses-iframe"));
 	driver.switchTo().frame(iframe);
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 
 	WebElement searchInput = driver.findElement(By.cssSelector("input#search"));
 	searchInput.sendKeys("Java selenium");
 
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 
 	driver.findElement(By.cssSelector("button[type='submit']")).click();
 
 	driver.switchTo().defaultContent();
 
 	driver.findElement(By.cssSelector("input[name='enter-name']")).sendKeys("Almazbek");
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 
 	driver.findElement(By.cssSelector("input#alertbtn")).click();
-	Thread.sleep(Duration.ofSeconds(2));
+	BrowserUtil.sleep(2);
 
 	Alert alert = driver.switchTo().alert();
 
 	alert.dismiss();
 
-	Thread.sleep(Duration.ofSeconds(2));
-
+	BrowserUtil.sleep(2);
 	driver.findElement(By.id("mousehover")).click();
 
     }
@@ -82,8 +81,7 @@ public class WindowAndIframe {
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
 
-	Thread.sleep(Duration.ofSeconds(3));
-
+	BrowserUtil.sleep(2);
 	BrowserUtil.quit();
     }
 }

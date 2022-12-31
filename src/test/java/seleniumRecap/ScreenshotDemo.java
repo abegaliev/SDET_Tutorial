@@ -32,7 +32,7 @@ public class ScreenshotDemo {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-	Thread.sleep(Duration.ofSeconds(4));
+	BrowserUtil.sleep(2);
 	BrowserUtil.quit();
 
     }
