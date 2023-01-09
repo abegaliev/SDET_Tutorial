@@ -3,22 +3,17 @@
 	<groupId>com.java</groupId>
 	<artifactId>SDET_Tutorial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<name>SDET_Tutorial</name>
 	<url>http://maven.apache.org</url>
-
 	<!-- to run a maven project use: mvn test -Dsurefire.suiteXmlFiles= your xml file ex:testng_runner.xml -->
-
 	<properties>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-
 		<gson.version>			 	 2.10		</gson.version>
 		<hamcrest.version>		 	 2.2		</hamcrest.version>
 		<selenium.version>		 	 4.5.3		</selenium.version>
-		<extentreports.version>	 	 2.41.2		</extentreports.version>
+		<extentreports.version>	 	 5.0.9		</extentreports.version>
 		<apache-poi.version>	  	 5.2.2		</apache-poi.version>
 		<commonsio.version>		  	 2.11.0		</commonsio.version>
 		<lombok.version>		  	 1.18.24 	</lombok.version>
@@ -28,6 +23,7 @@
 		<cucumber-java.version>	     7.5.0		</cucumber-java.version>
 		<cucumber-sandwich.version>  5.7.0		</cucumber-sandwich.version>
 		<ojdbc10.version>			 19.14.0.0	</ojdbc10.version>
+		<mongodb.version>			 3.12.11	</mongodb.version>
 		<rest-assured.version>		 4.5.1		</rest-assured.version>
 		<surefire-plugin.version>	 3.0.0-M5	</surefire-plugin.version>
 		<mvn-cucum-report.version>	 5.5.0		</mvn-cucum-report.version>
@@ -35,13 +31,10 @@
 		<log4j-core.version>		 2.19.0		</log4j-core.version>
 		<slf4j-api.version>			 2.0.0		</slf4j-api.version>
 		<slf4j-simple.version>		 2.0.0		</slf4j-simple.version>
-
-
+		
+		
 	</properties>
-
-
 	<dependencies>
-
 		<!-- is a json parser, used in Rest Api testing -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
@@ -49,7 +42,6 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 		</dependency>
-
 		<!-- Supports creating customized assertion matchers in testing  -->
 		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
 		<dependency>
@@ -58,7 +50,6 @@
 			<version>${hamcrest.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- Selenium library for java-->
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -66,15 +57,13 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-
 		<!-- For reports, creates nice report with diagrams and screenshots -->
-		<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
 		<dependency>
-			<groupId>com.relevantcodes</groupId>
+			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>${extentreports.version}</version>
 		</dependency>
-
 		<!-- Excel reading and writing -->
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
@@ -82,7 +71,6 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>${apache-poi.version}</version>
 		</dependency>
-
 		<!-- Helps to work with Input and Output files in java -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
@@ -90,7 +78,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commonsio.version}</version>
 		</dependency>
-
 		<!-- Creats setters and getters for variables in java-->
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
@@ -99,7 +86,6 @@
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- This is for managing the drivers for selenium framework -->
 		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
 		<dependency>
@@ -107,7 +93,6 @@
 			<artifactId>webdrivermanager</artifactId>
 			<version>${webdrivermanager.version}</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -115,7 +100,6 @@
 			<version>${testng.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -123,7 +107,6 @@
 			<version>${cucumber-testng.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -131,15 +114,12 @@
 			<version>${cucumber-java.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-sandwich -->
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-sandwich</artifactId>
 			<version>${cucumber-sandwich.version}</version>
 		</dependency>
-
-
 		<!-- Library for Database Testing -->
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
 		<dependency>
@@ -147,8 +127,12 @@
 			<artifactId>ojdbc10</artifactId>
 			<version>${ojdbc10.version}</version>
 		</dependency>
-
-
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongodb.version}</version>
+		</dependency>
 		<!-- Library for REST API Testing -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
@@ -156,7 +140,6 @@
 			<version>${rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- MySql connector for Java-->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -164,7 +147,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${sql-connector-java.version}</version>
 		</dependency>
-
 		<!--
 		
 		 Used for logging the driver actions in Selenium
@@ -187,19 +169,13 @@
 			<version>${slf4j-simple.version}</version>
 		</dependency>
 		-->
-
-
 	</dependencies>
-
 	<repositories>
-
 		<repository>
 			<id>oracle</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
-
 	</repositories>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -218,7 +194,6 @@
 						<testFailureIgnore>true</testFailureIgnore>
 					</configuration>
 				</plugin>
-
 				<!-- Downloads sources and javadoc-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -236,8 +211,6 @@
 						</execution>
 					</executions>
 				</plugin>
-
-
 				<plugin>
 					<groupId>net.masterthought</groupId>
 					<artifactId>maven-cucumber-reporting</artifactId>
@@ -263,7 +236,5 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 	</build>
-
 </project>
